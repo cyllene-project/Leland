@@ -15,6 +15,7 @@ let package = Package(
         .package(url: "https://github.com/chebizarro/CPixman.git", from: "1.0.0"),
         .package(url: "https://github.com/jatoben/CommandLine.git", from: "3.0.0-pre1"),
         .package(url: "https://github.com/kylef/fd.git", from: "0.2.0"),
+        .package(url: "https://github.com/cyllene-project/Networking.git", from: "0.2.1"),
     ],
     targets: [
         .target(
@@ -22,7 +23,7 @@ let package = Package(
             dependencies: ["TimeSpecification", "Compositor"]),
         .target(
             name: "Compositor",
-            dependencies: ["TimeSpecification", "CommandLine", "fd"]),
+            dependencies: ["TimeSpecification", "CommandLine", "fd", "Networking"]),
         .testTarget(
             name: "LelandTests",
             dependencies: ["Leland"]),

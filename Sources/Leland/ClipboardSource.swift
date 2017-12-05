@@ -1,4 +1,4 @@
-public struct ClipboardSource: DataSource {
+public struct ClipboardSource {
 
 	//var contents: Array
 	var clipboard: Clipboard
