@@ -64,9 +64,20 @@ public final class Loader {
 			exit(EXIT_SUCCESS)
 		}
 
-		// set log handlers
+		if self.version.value {
+			//print version
+			exit(EXIT_SUCCESS)
+		}
+
+		// check if can set stdin to cloexec
+		// Log.setHandler(vlog, vlogContinue)
+		// Log.fileOpen(log.value)
 		
-		catch_signals()
+		catchSignals()
+		
+		// log package info and command line
+		
+		//logUname()
 		
 		//verifyXdgRuntimeDir()
 
