@@ -1,3 +1,15 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the Cyllene open source project
+//
+// Copyright (c) 2017 Chris Daley
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+//
+// See http://www.apache.org/licenses/LICENSE-2.0 for license information
+//
+//===----------------------------------------------------------------------===//
+
 #if os(Linux)
 import Glibc
 #else
@@ -8,6 +20,7 @@ import Foundation
 import fd
 import CommandLineKit
 import OS
+import Shared
 
 public final class Loader {
 
@@ -70,10 +83,14 @@ public final class Loader {
 		}
 
 		// check if can set stdin to cloexec
+		if fdSetCloExec(fd:fileno(stdin)) < 0 {
+			print("Unable to set stdin as close on exec().")
+			exit(EXIT_FAILURE)			
 		// Log.setHandler(vlog, vlogContinue)
 		// Log.fileOpen(log.value)
-		
-		catchSignals()
+		}
+	
+		//catchSignals()
 		
 		// log package info and command line
 		
@@ -102,13 +119,14 @@ public final class Loader {
 		
 		//let section = config.getSection("core")
 		
-		if !self.waitForDebugger.value {
+		
+		//if !self.waitForDebugger.value {
 			//self.waitForDebugger.value = section.getBool("wait-for-debugger")
-		}
-		if self.waitForDebugger.value {
+		//}
+		//if self.waitForDebugger.value {
 			//log getpid()
 			//raise(Signal.stop)
-		}
+		//}
 		
 		if self.backend.value == nil {
 			//let backend = section.getString("backend")
@@ -131,12 +149,12 @@ public final class Loader {
 		
 		//ec.pendingOutputColdPlug()
 		
-		if self.idleTime.value! < 0 {
+		//if self.idleTime.value! < 0 {
 			//idleTime = section.getInt("idle-time", false)
-		}
-		if idleTime.value! < 0 {
+		//}
+		//if idleTime.value! < 0 {
 			//idleTime.value = 300
-		}
+		//}
 
 		//ec.idleTime = idleTime
 		//ec.defaultPointerGrab = nil
@@ -144,15 +162,15 @@ public final class Loader {
 		
 		//ec.logCapabilities()
 		
-		let serverSocket = getenv("WAYLAND_SERVER_SOCKET") {
+		//let serverSocket = getenv("WAYLAND_SERVER_SOCKET") {
 			//log("Running with single client")
 			//let fd = Int(serverSocket) {
 			//} else {
 			//fd = -1
 			//}
-		} else {
+		//} else {
 			//fd = -1
-		}
+		//}
 		
 		//if fd != -1 {
 			//try primaryClient = Client.init(display, fd)
@@ -209,7 +227,7 @@ public final class Loader {
 
 	}
     
-    func verifyXdgRuntimeDir() {
+    func verifyXdgRuntimeDir() throws {
 
 		let dir = ProcessInfo.processInfo.environment["XDG_RUNTIME_DIR"]
 		

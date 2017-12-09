@@ -23,7 +23,10 @@ let package = Package(
             dependencies: ["TimeSpecification", "Compositor"]),
         .target(
             name: "Compositor",
-            dependencies: ["TimeSpecification", "CommandLine", "fd", "Networking"]),
+            dependencies: ["TimeSpecification", "CommandLine", "fd", "Networking", "Shared"]),
+        .target(
+            name: "Shared",
+            dependencies: ["Networking"]),
         .testTarget(
             name: "LelandTests",
             dependencies: ["Leland"]),

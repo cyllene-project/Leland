@@ -10,11 +10,12 @@
 //
 //===----------------------------------------------------------------------===//
 
-public enum Dpms {
+struct LetCompositor {
 
-	case On
-	case Standby
-	case Suspend
-	case OFF
+	//var config: Config
+	//var parsedOptions: OutputConfig
+	//var pendingOutputListener: Listener
+	var drmUseCurrentMode: Bool
+
 
 }
